@@ -2097,6 +2097,13 @@ mod tests {
       map! { w!("x") => (w!("other"), w!("*"), false) }
     );
     assert_eq!(collect.non_static_access, set! {});
+
+    let (_collect, _code, hoist) = parse(
+      r#"
+      require('other');
+    "#,
+    );
+    assert_eq_imported_symbols!(hoist.imported_symbols, map! {});
   }
 
   #[test]
