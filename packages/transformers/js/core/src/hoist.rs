@@ -642,6 +642,9 @@ impl<'a> Fold for Hoist<'a> {
         // require('foo') -> $id$import$foo
         if let Some(source) = match_require(&node, &self.collect.decls, self.collect.ignore_mark) {
           self.add_require(&source);
+
+          // !!
+
           return Expr::Ident(self.get_import_ident(
             call.span,
             &source,
